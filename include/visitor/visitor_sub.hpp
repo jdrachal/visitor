@@ -10,14 +10,14 @@
 #include <expression/sub.hpp>
 
 class VisitorSub : public Visitor {
-    void evaluateSub(const Sub* ex) override {
+    void visit(const Sub* ex) override {
         Operands operands = ex->operands();
         result_ = operands.a - operands.b;
         operation_ = "sub";
     }
-    void evaluateAdd(const Add*) override {}
-    void evaluateMul(const Mul*) override {}
-    void evaluateDiv(const Div*) override {}
+    void visit(const Add*) override {}
+    void visit(const Mul*) override {}
+    void visit(const Div*) override {}
 
     [[nodiscard]] const int & result() const override { return result_; }
     [[nodiscard]] const std::string & operation() const override { return operation_; }

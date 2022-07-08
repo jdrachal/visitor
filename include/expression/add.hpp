@@ -18,7 +18,7 @@ public:
         operands_.b = b;
     };
     void accept(Visitor *visitor) const override {
-        visitor->evaluateAdd(this);
+        visitor->visit(this);
     }
 
     [[nodiscard]] const Operands & operands() const { return operands_; }

@@ -11,14 +11,14 @@
 
 class VisitorDiv : public Visitor {
 public:
-    void evaluateDiv(const Div* ex) override {
+    void visit(const Div* ex) override {
         Operands operands = ex->operands();
         result_ = operands.a / operands.b;
         operation_ = "div";
     }
-    void evaluateAdd(const Add*) override {}
-    void evaluateSub(const Sub*) override {}
-    void evaluateMul(const Mul*) override {}
+    void visit(const Add*) override {}
+    void visit(const Sub*) override {}
+    void visit(const Mul*) override {}
 
     [[nodiscard]] const int & result() const override { return result_; }
     [[nodiscard]] const std::string & operation() const override { return operation_; }

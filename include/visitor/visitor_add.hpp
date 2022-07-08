@@ -12,14 +12,14 @@
 
 class VisitorAdd : public Visitor {
 public:
-    void evaluateAdd(const Add* ex) override {
+    void visit(const Add* ex) override {
         Operands operands = ex->operands();
         result_ = operands.a + operands.b;
         operation_ = "add";
     }
-    void evaluateSub(const Sub*) override {}
-    void evaluateMul(const Mul*) override {}
-    void evaluateDiv(const Div*) override {}
+    void visit(const Sub*) override {}
+    void visit(const Mul*) override {}
+    void visit(const Div*) override {}
 
     [[nodiscard]] const int & result() const override { return result_; }
     [[nodiscard]] const std::string & operation() const override { return operation_; }

@@ -22,7 +22,7 @@ public:
         operands_.b = b;
     };
     void accept(Visitor *visitor) const override {
-        visitor->evaluateDiv(this);
+        visitor->visit(this);
     }
 
     [[nodiscard]] const Operands & operands() const { return operands_; }

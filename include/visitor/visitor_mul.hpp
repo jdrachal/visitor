@@ -10,14 +10,14 @@
 #include <expression/mul.hpp>
 
 class VisitorMul : public Visitor {
-    void evaluateMul(const Mul* ex) override {
+    void visit(const Mul* ex) override {
         Operands operands = ex->operands();
         result_ = operands.a * operands.b;
         operation_ = "mul";
     }
-    void evaluateAdd(const Add*) override {}
-    void evaluateSub(const Sub*) override {}
-    void evaluateDiv(const Div*) override {}
+    void visit(const Add*) override {}
+    void visit(const Sub*) override {}
+    void visit(const Div*) override {}
 
     [[nodiscard]] const int & result() const override { return result_; }
     [[nodiscard]] const std::string & operation() const override { return operation_; }

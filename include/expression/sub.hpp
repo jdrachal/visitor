@@ -19,7 +19,7 @@ public:
     };
 
     void accept(Visitor *visitor) const override {
-        visitor->evaluateSub(this);
+        visitor->visit(this);
     }
 
     [[nodiscard]] const Operands & operands() const { return operands_; }
