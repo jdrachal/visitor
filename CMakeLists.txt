@@ -33,10 +33,9 @@ include(ExternalProject)
 ExternalProject_Add( project_fc
         PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/fc
         SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/fc
-        CONFIGURE_COMMAND cmake .
         BUILD_COMMAND make
         INSTALL_COMMAND true
-        BUILD_BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/libfc.a
+        BUILD_BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/external/fc/project_fc-build/.libs/libfc.a
         )
 
 ExternalProject_Get_Property(project_fc binary_dir)
@@ -45,12 +44,12 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 
     add_library(fc STATIC IMPORTED)
-    set_property(TARGET fc PROPERTY IMPORTED_LOCATION ${binary_dir}/libfc${CMAKE_STATIC_LIBRARY_SUFFIX})
+    set_property(TARGET fc PROPERTY IMPORTED_LOCATION ${binary_dir}/.libs/libfc${CMAKE_STATIC_LIBRARY_SUFFIX})
     set_property(TARGET fc PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}/external/fc/include)
     add_dependencies(fc project_fc)
     target_link_libraries(fc INTERFACE ${Boost_LIBRARIES})
 
     add_executable(visitor main.cpp)
-    target_link_libraries(visitor fc )
+    target_link_libraries(visitor fc)
 endif()
 
