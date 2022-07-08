@@ -14,5 +14,7 @@ put it in ./external/ subdirectory
 
 #### Build and run
 cmake .
+
 make .
+
 ./visitor
