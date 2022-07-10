@@ -11,7 +11,11 @@ It uses external *fc* library (link below)
 https://gitlab.syncad.com/hive/hive/-/tree/develop/libraries/fc
 
 #### Build and run
+Build for Ubuntu 20.04
 ```
+git clone https://github.com/jdrachal/visitor.git
+cd visitor
+git submodule update --init --recursive
 cmake .
 make
 ./visitor
@@ -19,7 +23,7 @@ make
 
 
 #### Output
-Program returns the evaluations of four expressions for *static visitor* and *abstract visitor* 
+Program returns the evaluations of four expressions for *static visitor* and *abstract visitor*
 
 Expressions:
 * add: *a + b*
