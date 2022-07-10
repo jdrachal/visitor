@@ -3,18 +3,28 @@
 ### Description
 
 #### Purpose
-This application was made to prove that I'm  able to understand and use visitor, static visitor and static variant
+This application was made to prove that I'm  able to understand and use *visitor*, *static visitor* and *static variant*
 patterns
 
 #### Externals
-It's needed to clone and include fc library 
+It uses external *fc* library (link below)
 https://gitlab.syncad.com/hive/hive/-/tree/develop/libraries/fc
 
-put it in ./external/ subdirectory
-
 #### Build and run
+```
 cmake .
-
-make .
-
+make
 ./visitor
+```
+
+
+#### Output
+Program returns the evaluations of four expressions for *static visitor* and *abstract visitor* 
+
+Expressions:
+* add: *a + b*
+* sub: *a - b*
+* mul: *a * b*
+* div: *a / b*
+
+Where operands are hardcoded as follows: *a=5* and *b=3*

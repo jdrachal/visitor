@@ -1,0 +1,3 @@
+[submodule "vendors/hive"]
+	path = vendors/hive
+	url = https://gitlab.syncad.com/hive/hive.git

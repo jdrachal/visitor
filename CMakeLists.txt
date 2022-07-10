@@ -29,27 +29,21 @@ IF(NOT "${Boost_VERSION}" MATCHES "1.53(.*)")
     SET(Boost_LIBRARIES ${BOOST_LIBRARIES_TEMP} ${Boost_LIBRARIES})
 ENDIF()
 
-include(ExternalProject)
-ExternalProject_Add( project_fc
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/external/fc
-        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/fc
-        BUILD_COMMAND make
-        INSTALL_COMMAND true
-        BUILD_BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/external/fc/project_fc-build/.libs/libfc.a
-        )
-
-ExternalProject_Get_Property(project_fc binary_dir)
+set( FC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendors/hive/libraries/fc" )
+add_subdirectory(vendors/hive/libraries/fc)
+add_custom_target(build_fc ALL COMMAND make -C ${FC_DIR})
 
 if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
-
-    add_library(fc STATIC IMPORTED)
-    set_property(TARGET fc PROPERTY IMPORTED_LOCATION ${binary_dir}/.libs/libfc${CMAKE_STATIC_LIBRARY_SUFFIX})
-    set_property(TARGET fc PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}/external/fc/include)
-    add_dependencies(fc project_fc)
-    target_link_libraries(fc INTERFACE ${Boost_LIBRARIES})
-
-    add_executable(visitor main.cpp)
-    target_link_libraries(visitor fc)
 endif()
+
+add_library(ven_fc STATIC IMPORTED)
+add_dependencies(ven_fc build_fc)
+set_property(TARGET ven_fc PROPERTY IMPORTED_LOCATION ${FC_DIR}/libfc${CMAKE_STATIC_LIBRARY_SUFFIX})
+set_property(TARGET ven_fc PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${FC_DIR}/include)
+target_link_libraries(ven_fc INTERFACE ${Boost_LIBRARIES})
+
+add_executable(visitor main.cpp)
+add_dependencies(visitor ven_fc)
+target_link_libraries(visitor ven_fc)
 

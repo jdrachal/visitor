@@ -13,16 +13,18 @@
 
 int main() {
 
+    int a = 5;
+    int b = 3;
     std::cout << "Static visitor" << std::endl;
 
     {
         StaticVisitor visitor;
         using SVar = fc::static_variant<Add, Sub, Mul, Div>;
 
-        std::array<std::unique_ptr<SVar>, 4> expressions = {std::make_unique<SVar>(Add(2, 2)),
-                                                            std::make_unique<SVar>(Sub(2, 2)),
-                                                            std::make_unique<SVar>(Mul(2, 2)),
-                                                            std::make_unique<SVar>(Div(2, 2))};
+        std::array<std::unique_ptr<SVar>, 4> expressions = {std::make_unique<SVar>(Add(a, b)),
+                                                            std::make_unique<SVar>(Sub(a, b)),
+                                                            std::make_unique<SVar>(Mul(a, b)),
+                                                            std::make_unique<SVar>(Div(a, b))};
 
         for (const auto& e : expressions){
             e->visit(visitor);
@@ -38,10 +40,10 @@ int main() {
                                                             std::make_unique<VisitorMul>(),
                                                             std::make_unique<VisitorDiv>()};
 
-        std::array<std::unique_ptr<Expression>, 4> expressions = {std::make_unique<Add>(2, 2),
-                                                                  std::make_unique<Sub>(2, 2),
-                                                                  std::make_unique<Mul>(2, 2),
-                                                                  std::make_unique<Div>(2, 2)};
+        std::array<std::unique_ptr<Expression>, 4> expressions = {std::make_unique<Add>(a, b),
+                                                                  std::make_unique<Sub>(a, b),
+                                                                  std::make_unique<Mul>(a, b),
+                                                                  std::make_unique<Div>(a, b)};
 
 
         for (int i = 0; i < visitors.size(); i++) {
